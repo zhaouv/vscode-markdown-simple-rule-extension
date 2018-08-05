@@ -3,8 +3,8 @@
 Add some simple rules
 
 + tasklist  
-`+ [ ] tasklist` => <input type="checkbox" disabled> tasklist  
-`+ [x] tasklist` => <input type="checkbox" disabled checked> tasklist
+`+ [ ] tasklist` => `<input type="checkbox" disabled> tasklist`  
+`+ [x] tasklist` => `<input type="checkbox" disabled checked> tasklist`
 
 
 + classname  

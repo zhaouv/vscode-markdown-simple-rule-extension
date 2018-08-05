@@ -30,6 +30,8 @@ function activate(context) {
             const render = md.render;
             md.render = (src, env) => {
                 // console.log(src);
+                src = src.replace(/\\\[/g, 'tempTokenForChar91');
+                src = src.replace(/\n---\n/g, '\n<hr style="clear:both">\n');
                 let result = render.call(md, src, env);
                 // tasklist
                 result = result.replace(/<li([^>]*)class="([^>]*)(>\s*<p data-line="\d+" class="code-line")?>\[(x|\ )\]\ /g, function (str) {
@@ -72,6 +74,7 @@ function activate(context) {
                     _result = result.replace(re_div_g, _div_replace);
                 }
                 result = result.replace(/temp_token_for_char_91_1/g, '[');
+                result = result.replace(/tempTokenForChar91/g, '[');
                 // console.log(result)
                 return result;
             };

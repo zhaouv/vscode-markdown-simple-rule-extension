@@ -38,6 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
             const render = md.render;
             md.render = (src: any,env: any) => {
                 // console.log(src);
+                src=src.replace(/\\\[/g,'tempTokenForChar91')
+                src=src.replace(/\n---\n/g,'\n<hr style="clear:both">\n')
                 let result = render.call(md,src,env);
                 // tasklist
                 result=result.replace(/<li([^>]*)class="([^>]*)(>\s*<p data-line="\d+" class="code-line")?>\[(x|\ )\]\ /g,function(str: string){
@@ -84,6 +86,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
 
                 result=result.replace(/temp_token_for_char_91_1/g,'[')
+                result=result.replace(/tempTokenForChar91/g,'[')
                 // console.log(result)
                 return result
             }
