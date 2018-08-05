@@ -31,7 +31,7 @@ function activate(context) {
             md.render = (src, env) => {
                 // console.log(src);
                 src = src.replace(/\\\[/g, 'tempTokenForChar91');
-                src = src.replace(/\n---/g, '\n<hr style="clear:both">');
+                src = src.replace(/\n---\s*?\n/g, '\n<hr style="clear:both">\n');
                 let result = render.call(md, src, env);
                 // tasklist
                 result = result.replace(/<li([^>]*)class="([^>]*)(>\s*<p data-line="\d+" class="code-line")?>\[(x|\ )\]\ /g, function (str) {
