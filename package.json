@@ -20,14 +20,24 @@
             {
               "command": "extension.convertClassNameRule",
               "title": "Convert ClassName Rule"
+            },
+            {
+              "command": "extension.replacePictureByBase64",
+              "title": "Replace Picture By Base64"
             }
           ],
           "keybindings": [
             {
-              "command": "extension.convertClassNameRule",
-              "key": "ctrl+alt+c",
-              "mac": "cmd+alt+c",
-              "when": "editorTextFocus"
+                "command": "extension.convertClassNameRule",
+                "key": "ctrl+alt+c",
+                "mac": "cmd+alt+c",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.replacePictureByBase64",
+                "key": "ctrl+alt+b",
+                "mac": "cmd+alt+b",
+                "when": "editorTextFocus"
             }
           ],
           "markdown.markdownItPlugins": true

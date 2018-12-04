@@ -1,6 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -29,8 +30,36 @@ export function activate(context: vscode.ExtensionContext) {
             edit.replace(selection, content);
         });
     });
+    let disposable2 = vscode.commands.registerCommand('extension.replacePictureByBase64', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return; // No open text editor
+        }
+
+        let selection = editor.selection;
+        if (selection.isEmpty) {
+            return;
+        }
+
+        let projectPath = vscode.workspace.rootPath;
+
+        let imagePath = projectPath+'/'+editor.document.getText(selection);
+        if (!fs.existsSync(imagePath)) {
+            return;
+        }
+
+        let data = fs.readFileSync(imagePath);
+        
+        let content='\r\n    data:image/' + imagePath.split('.').slice(-1) + ';base64,' + new Buffer(data).toString('base64') +'\r\n';
+
+        editor.edit(edit => {
+            edit.replace(selection, content);
+            fs.unlinkSync(imagePath);
+        });
+    });
 
     context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable2);
 
     return {
         extendMarkdownIt(md: any) {

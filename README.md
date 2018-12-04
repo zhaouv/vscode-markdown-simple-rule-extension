@@ -22,3 +22,5 @@ Add some simple rules
 
 + You can also use keyboard binding: `Ctrl+Alt+C` (`Cmd+Alt+C` on Mac),  
 to convert selected classname rule into html (then it can be rendered correctly in other views).
+
++ Use keyboard binding: `Ctrl+Alt+B` (`Cmd+Alt+B` on Mac) to convert a img by base64.

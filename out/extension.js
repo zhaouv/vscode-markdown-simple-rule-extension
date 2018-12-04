@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
+const fs = require("fs");
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.convertClassNameRule', () => {
         let editor = vscode.window.activeTextEditor;
@@ -24,7 +25,29 @@ function activate(context) {
             edit.replace(selection, content);
         });
     });
+    let disposable2 = vscode.commands.registerCommand('extension.replacePictureByBase64', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return; // No open text editor
+        }
+        let selection = editor.selection;
+        if (selection.isEmpty) {
+            return;
+        }
+        let projectPath = vscode.workspace.rootPath;
+        let imagePath = projectPath + '/' + editor.document.getText(selection);
+        if (!fs.existsSync(imagePath)) {
+            return;
+        }
+        let data = fs.readFileSync(imagePath);
+        let content = '\r\n    data:image/' + imagePath.split('.').slice(-1) + ';base64,' + new Buffer(data).toString('base64') + '\r\n';
+        editor.edit(edit => {
+            edit.replace(selection, content);
+            fs.unlinkSync(imagePath);
+        });
+    });
     context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable2);
     return {
         extendMarkdownIt(md) {
             const render = md.render;
