@@ -50,12 +50,13 @@ function activate(context) {
     context.subscriptions.push(disposable2);
     return {
         extendMarkdownIt(md) {
-            const render = md.render;
-            md.render = (src, env) => {
+            let processSource = (src) => {
                 // console.log(src);
                 src = src.replace(/\\\[/g, 'tempTokenForChar91');
                 src = src.replace(/\n---\s*?\n/g, '\n<hr style="clear:both">\n');
-                let result = render.call(md, src, env);
+                return src;
+            };
+            let processResult = (result) => {
                 // tasklist
                 result = result.replace(/<li([^>]*)class="([^>]*)(>\s*<p data-line="\d+" class="code-line")?>\[(x|\ )\]\ /g, function (str) {
                     return str.replace('>[ ] ', '><input type="checkbox" style="margin-left:-1.22em;margin-right:0.42em;" disabled>')
@@ -83,7 +84,7 @@ function activate(context) {
                 }
                 let re_div_g = /\n(<p data-line="\d+" class="code-line">)((?:\.[a-zA-Z_\-][a-zA-Z\-_0-9]*)+)\[((?:[^\[\]]|\](?!<\/p>))*)\]<\/p>\n/g;
                 let re_div = /\n(<p data-line="\d+" class="code-line">)((?:\.[a-zA-Z_\-][a-zA-Z\-_0-9]*)+)\[((?:[^\[\]]|\](?!<\/p>))*)\]<\/p>\n/;
-                //            1                                      2                                    3
+                //              1                                      2                                    3
                 let _div_replace = (str) => {
                     let groups = str.match(re_div);
                     let tag = 'div';
@@ -101,6 +102,24 @@ function activate(context) {
                 // console.log(result)
                 return result;
             };
+            if (vscode.version > '1.21.99') {
+                const parse = md.parse;
+                md.parse = (src, env) => {
+                    return parse.call(md, processSource(src), env);
+                };
+                const rendererRender = md.renderer.render;
+                md.renderer.render = (tokens, options, env) => {
+                    return processResult(rendererRender.call(md.renderer, tokens, options, env));
+                };
+            }
+            else {
+                const render = md.render;
+                md.render = (src, env) => {
+                    src = processSource(src);
+                    let result = render.call(md, src, env);
+                    return processResult(result);
+                };
+            }
             return md;
         }
     };

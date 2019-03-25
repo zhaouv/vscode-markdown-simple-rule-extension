@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.4 (March 25, 2019)
+
+- Fix: Support higher vscode version
+
 ## 0.0.3 (December 4, 2018)
 
 - Feature: Replace Picture By Base64
