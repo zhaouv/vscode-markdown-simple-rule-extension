@@ -11,11 +11,22 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.convertClassNameRule",
+        "onCommand:extension.insertFormattedTime",
         "onLanguage:markdown"
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Tick : Insert Formatted Time - Format",
+            "properties": {
+              "tick.format": {
+                "type": "string",
+                "default": "yyyyMMdd_HHmmss",
+                "description": "the format of inserted time"
+              }
+            }
+          },
         "commands": [
             {
               "command": "extension.convertClassNameRule",
@@ -24,20 +35,10 @@
             {
               "command": "extension.replacePictureByBase64",
               "title": "Replace Picture By Base64"
-            }
-          ],
-          "keybindings": [
-            {
-                "command": "extension.convertClassNameRule",
-                "key": "ctrl+alt+c",
-                "mac": "cmd+alt+c",
-                "when": "editorTextFocus"
             },
             {
-                "command": "extension.replacePictureByBase64",
-                "key": "ctrl+alt+b",
-                "mac": "cmd+alt+b",
-                "when": "editorTextFocus"
+              "command": "extension.insertFormattedTime",
+              "title": "Tick : Insert Formatted Time"
             }
           ],
           "markdown.markdownItPlugins": true

@@ -20,7 +20,9 @@ Add some simple rules
 
 + Just preview markdown file.
 
-+ You can also use keyboard binding: `Ctrl+Alt+C` (`Cmd+Alt+C` on Mac),  
++ You can also press `F1` `>Convert ClassName Rule`  
 to convert selected classname rule into html (then it can be rendered correctly in other views).
 
-+ Use keyboard binding: `Ctrl+Alt+B` (`Cmd+Alt+B` on Mac) to convert a img by base64.
++ Press `F1` `>Replace Picture By Base64` to convert a img by base64.
+
++ Press `F1` `>Tick : Insert Formatted Time` to insert the formatted time.

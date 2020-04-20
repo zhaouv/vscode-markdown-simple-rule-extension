@@ -57,9 +57,42 @@ export function activate(context: vscode.ExtensionContext) {
             fs.unlinkSync(imagePath);
         });
     });
+    let disposable3 = vscode.commands.registerCommand('extension.insertFormattedTime', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return; // No open text editor
+        }
+
+        let selection = editor.selection;
+
+        let formatstr=vscode.workspace.getConfiguration('tick')['format']||'yyyyMMdd_HHmmss';
+        let formatedstr=(function(fmt,dateobj){ 
+            let o = {   
+                "M+" : dateobj.getMonth()+1,                 
+                "d+" : dateobj.getDate(),                    
+                "H+" : dateobj.getHours(),                   
+                "m+" : dateobj.getMinutes(),                 
+                "s+" : dateobj.getSeconds(),                 
+                "q+" : Math.floor((dateobj.getMonth()+3)/3), 
+                "S"  : dateobj.getMilliseconds()             
+            };   
+            if(/(y+)/.test(fmt))   
+                fmt=fmt.replace(RegExp.$1, (dateobj.getFullYear()+"").substr(4 - RegExp.$1.length));   
+            for(let k in o)   
+                if(new RegExp("("+ k +")").test(fmt))   
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+            return fmt;   
+        })(formatstr,new Date())
+        let content = '<--'+formatedstr+'-->'
+
+        editor.edit(edit => {
+            edit.replace(selection, content);
+        });
+    });
 
     context.subscriptions.push(disposable);
     context.subscriptions.push(disposable2);
+    context.subscriptions.push(disposable3);
 
     return {
         extendMarkdownIt(md: any) {

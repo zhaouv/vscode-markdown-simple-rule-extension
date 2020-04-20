@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.5 (April 20, 2020)
+
+- Feature: Insert Formatted Time
+- Remove all key binding
+
 ## 0.0.4 (March 25, 2019)
 
 - Fix: Support higher vscode version
