@@ -3,7 +3,6 @@
 ## 0.0.5 (April 20, 2020)
 
 - Feature: Insert Formatted Time
-- Remove all key bindings
 
 ## 0.0.4 (March 25, 2019)
 

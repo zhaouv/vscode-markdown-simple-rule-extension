@@ -25,4 +25,4 @@ to convert selected classname rule into html (then it can be rendered correctly 
 
 + Press `F1` `>Replace Picture By Base64` to convert a img by base64.
 
-+ Press `F1` `>Tick : Insert Formatted Time` to insert the formatted time.
++ Press `Ctrl+Alt+t` (`Cmd+Alt+t` for Mac) to insert the formatted time.

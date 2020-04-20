@@ -27,6 +27,14 @@
               }
             }
           },
+        "keybindings": [
+            {
+              "command": "extension.insertFormattedTime",
+              "key": "ctrl+alt+t",
+              "mac": "cmd+alt+t",
+              "when": "editorTextFocus"
+            }
+          ],
         "commands": [
             {
               "command": "extension.convertClassNameRule",
