@@ -4,6 +4,12 @@
     "description": "add some simple rules, personal use",
     "version": "0.0.6",
     "publisher": "zhaouv",
+    "repository": {
+        "url": "https://github.com/zhaouv/vscode-markdown-simple-rule-extension.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zhaouv/vscode-markdown-simple-rule-extension/issues"
+    },
     "engines": {
         "vscode": "^1.1.6"
     },
