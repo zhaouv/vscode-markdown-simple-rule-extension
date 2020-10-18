@@ -1,8 +1,8 @@
 {
     "name": "markdown-simple-rule-extension",
     "displayName": "Markdown Simple Rule Extension",
-    "description": "add some simple rules",
-    "version": "0.0.1",
+    "description": "add some simple rules, personal use",
+    "version": "0.0.6",
     "publisher": "zhaouv",
     "engines": {
         "vscode": "^1.1.6"
@@ -27,14 +27,6 @@
               }
             }
           },
-        "keybindings": [
-            {
-              "command": "extension.insertFormattedTime",
-              "key": "ctrl+alt+t",
-              "mac": "cmd+alt+t",
-              "when": "editorTextFocus"
-            }
-          ],
         "commands": [
             {
               "command": "extension.convertClassNameRule",
@@ -47,6 +39,10 @@
             {
               "command": "extension.insertFormattedTime",
               "title": "Tick : Insert Formatted Time"
+            },
+            {
+              "command": "extension.insertFormattedTimeWeeks",
+              "title": "Weeks : Insert Formatted Time"
             }
           ],
           "markdown.markdownItPlugins": true
