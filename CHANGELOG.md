@@ -2,7 +2,7 @@
 
 ## 0.0.6 2020-10-18
 
-- Feature: Insert Formatted Time - Weeks
+- Feature: Insert Formatted Time - Week
 
 ## 0.0.5 (April 20, 2020)
 

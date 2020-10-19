@@ -89,7 +89,7 @@ export function activate(context: vscode.ExtensionContext) {
             edit.replace(selection, content);
         });
     });
-    let disposable4 = vscode.commands.registerCommand('extension.insertFormattedTimeWeeks', () => {
+    let disposable4 = vscode.commands.registerCommand('extension.insertFormattedTimeWeek', () => {
         let editor = vscode.window.activeTextEditor;
         if (!editor) {
             return; // No open text editor
@@ -98,34 +98,34 @@ export function activate(context: vscode.ExtensionContext) {
         let selection = editor.selection;
 
         let content = '';
-        {
-            let d=new Date()
-            d.getDay() 
-            let w=(d.getDay()+6)%7 
-            let d1=new Date((d-0)-w*86400000)
-            let d2=new Date((d-0)-(6-w)*86400000)
-            let formatefunc=function(fmt,dateobj){
-                let o = {   
-                    "M+" : dateobj.getMonth()+1,                 
-                    "d+" : dateobj.getDate(),                    
-                    "H+" : dateobj.getHours(),                   
-                    "m+" : dateobj.getMinutes(),                 
-                    "s+" : dateobj.getSeconds(),                 
-                    "q+" : Math.floor((dateobj.getMonth()+3)/3), 
-                    "S"  : dateobj.getMilliseconds()             
-                };   
-                if(/(y+)/.test(fmt))   
-                    fmt=fmt.replace(RegExp.$1, (dateobj.getFullYear()+"").substr(4 - RegExp.$1.length));   
-                for(let k in o)   
-                    if(new RegExp("("+ k +")").test(fmt))   
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
-                return fmt;   
-            }
-            let fmtstr='yyyyMMdd'
-            let s1=formatefunc(fmtstr,d1)
-            let s2=formatefunc(fmtstr,d2)
-            content=s1+'-'+s2;
+        
+        let d=new Date()
+        d.getDay() 
+        let w=(d.getDay()+6)%7 
+        let d1=new Date((d-0)-w*86400000)
+        let d2=new Date((d-0)+(6-w)*86400000)
+        let formatefunc=function(fmt,dateobj){
+            let o = {   
+                "M+" : dateobj.getMonth()+1,                 
+                "d+" : dateobj.getDate(),                    
+                "H+" : dateobj.getHours(),                   
+                "m+" : dateobj.getMinutes(),                 
+                "s+" : dateobj.getSeconds(),                 
+                "q+" : Math.floor((dateobj.getMonth()+3)/3), 
+                "S"  : dateobj.getMilliseconds()             
+            };   
+            if(/(y+)/.test(fmt))   
+                fmt=fmt.replace(RegExp.$1, (dateobj.getFullYear()+"").substr(4 - RegExp.$1.length));   
+            for(let k in o)   
+                if(new RegExp("("+ k +")").test(fmt))   
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+            return fmt;   
         }
+        let fmtstr='yyyyMMdd'
+        let s1=formatefunc(fmtstr,d1)
+        let s2=formatefunc(fmtstr,d2)
+        content=s1+'-'+s2;
+        
 
         editor.edit(edit => {
             edit.replace(selection, content);

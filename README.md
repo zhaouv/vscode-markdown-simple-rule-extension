@@ -27,4 +27,4 @@ to convert selected classname rule into html (then it can be rendered correctly 
 
 + Press `F1` `>Tick : Insert Formatted Time` to insert the formatted time.
 
-+ Press `F1` `>Weeks : Insert Formatted Time` to insert the formatted time - weeks.
++ Press `F1` `>Week : Insert Formatted Time` to insert the formatted time - Week.
