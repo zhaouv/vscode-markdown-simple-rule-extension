@@ -2,7 +2,7 @@
     "name": "markdown-simple-rule-extension",
     "displayName": "Markdown Simple Rule Extension",
     "description": "add some simple rules, personal use",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "publisher": "zhaouv",
     "repository": {
         "url": "https://github.com/zhaouv/vscode-markdown-simple-rule-extension.git"

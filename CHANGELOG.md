@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.7 2026-10-07
+## 0.0.8 2026-10-07
 
 - Feature: Add `Copy With Name +1` to copy the current file with its trailing filename number incremented.
 
