@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.7 2026-10-07
+
+- Feature: Add `Copy With Name +1` to copy the current file with its trailing filename number incremented.
+
 ## 0.0.6 2020-10-18
 
 - Feature: Insert Formatted Time - Week
