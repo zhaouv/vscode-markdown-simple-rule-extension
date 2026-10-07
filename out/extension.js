@@ -2,6 +2,28 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const fs = require("fs");
+const path = require("path");
+function incrementFileName(fileName) {
+    let extension = path.extname(fileName);
+    let stem = fileName.slice(0, fileName.length - extension.length);
+    let match = stem.match(/(\d+)$/);
+    if (!match) {
+        return stem + '1' + extension;
+    }
+    let number = match[1];
+    let incremented = number.split('');
+    let carry = 1;
+    for (let index = incremented.length - 1; index >= 0 && carry; index--) {
+        let digit = incremented[index].charCodeAt(0) - '0'.charCodeAt(0) + carry;
+        incremented[index] = String.fromCharCode('0'.charCodeAt(0) + digit % 10);
+        carry = digit >= 10 ? 1 : 0;
+    }
+    if (carry) {
+        incremented.unshift('1');
+    }
+    return stem.slice(0, stem.length - number.length) + incremented.join('') + extension;
+}
+exports.incrementFileName = incrementFileName;
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.convertClassNameRule', () => {
         let editor = vscode.window.activeTextEditor;
@@ -112,10 +134,35 @@ function activate(context) {
             edit.replace(selection, content);
         });
     });
+    let disposable5 = vscode.commands.registerCommand('extension.copyWithNamePlusOne', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage('There is no active file to copy.');
+            return;
+        }
+        let sourcePath = editor.document.fileName;
+        if (!sourcePath || !fs.existsSync(sourcePath)) {
+            vscode.window.showErrorMessage('The active document is not a file on disk.');
+            return;
+        }
+        let targetPath = path.join(path.dirname(sourcePath), incrementFileName(path.basename(sourcePath)));
+        if (fs.existsSync(targetPath)) {
+            vscode.window.showErrorMessage('The target file already exists: ' + path.basename(targetPath));
+            return;
+        }
+        try {
+            fs.writeFileSync(targetPath, fs.readFileSync(sourcePath));
+            vscode.window.showInformationMessage('Copied to ' + path.basename(targetPath));
+        }
+        catch (error) {
+            vscode.window.showErrorMessage('Could not copy the file: ' + error.message);
+        }
+    });
     context.subscriptions.push(disposable);
     context.subscriptions.push(disposable2);
     context.subscriptions.push(disposable3);
     context.subscriptions.push(disposable4);
+    context.subscriptions.push(disposable5);
     return {
         extendMarkdownIt(md) {
             let processSource = (src) => {

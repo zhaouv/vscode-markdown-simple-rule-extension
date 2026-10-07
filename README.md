@@ -28,3 +28,5 @@ to convert selected classname rule into html (then it can be rendered correctly 
 + Press `F1` `>Tick : Insert Formatted Time` to insert the formatted time.
 
 + Press `F1` `>Week : Insert Formatted Time` to insert the formatted time - Week.
+
++ Press `F1` `>Copy With Name +1` to copy the current file and increment its name.

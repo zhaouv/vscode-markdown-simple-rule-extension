@@ -18,6 +18,7 @@
     ],
     "activationEvents": [
         "onCommand:extension.insertFormattedTime",
+        "onCommand:extension.copyWithNamePlusOne",
         "onLanguage:markdown"
     ],
     "main": "./out/extension",
@@ -49,6 +50,10 @@
             {
               "command": "extension.insertFormattedTimeWeek",
               "title": "Week : Insert Formatted Time"
+            },
+            {
+              "command": "extension.copyWithNamePlusOne",
+              "title": "Copy With Name +1"
             }
           ],
           "markdown.markdownItPlugins": true
